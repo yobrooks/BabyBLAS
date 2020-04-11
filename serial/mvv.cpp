@@ -1,6 +1,7 @@
 void mvv(int threads, int length, double *m, double *v, double *rv);
 
 //NEED TO CHECK
+//M = matrix; V = vector, RV = result vector
 void mvv(int threads, int length, double *m, double *v, double *rv){
    /* Perform Regular Matrix Vector Multiplication*/
     for(int i = 0; i < length; i++){
