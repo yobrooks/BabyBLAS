@@ -6,7 +6,7 @@ all: lib
 dot.o : dot.cpp
 	$(CC) $(CFLAGS)  -c dot.cpp
 
-mvv.o : mvv.c
+mvv.o : mvv.cpp
 	$(CC) $(CFLAGS)  -c mvv.cpp
 
 mmm.o : mmm.cpp
