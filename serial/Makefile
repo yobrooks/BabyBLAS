@@ -2,31 +2,26 @@ include ../Makefile.inc
 
 all: lib
 
-dot.o : dot.cpp
-	$(CC) $(CFLAGS) -c dot.cpp
+dot.o : dot.c
+	$(CC) $(CFLAGS) -c dot.c
 
-vvm.o : vvm.cpp
-	$(CC) $(CFLAGS) -c vvm.cpp
+vvm.o : vvm.c
+	$(CC) $(CFLAGS) -c vvm.c
 
-mmm.o : mmm.cpp
-	$(CC) $(CFLAGS) -c mmm.cpp
+mmm.o : mmm.c
+	$(CC) $(CFLAGS) -c mmm.c
 
-mvv.o : mvv.cpp
-	$(CC) $(CFLAGS) -c mvv.cpp
+mvv.o : mvv.c
+	$(CC) $(CFLAGS) -c mvv.c
 
-ils.o : ils.cpp
-	$(CC) $(CFLAGS) -c ils.cpp
 
-dls.o : dls.cpp
-	$(CC) $(CFLAGS) -c dls.cpp
-
-lib: dot.o vvm.o mmm.o mvv.o ils.o dls.o
-	ar -rc libserial_bblas.a dot.o vvm.o mmm.o  mvv.o ils.o dls.o
+lib: dot.o vvm.o mmm.o mvv.o
+	ar -rc libserial_bblas.a dot.o vvm.o mmm.o  mvv.o
 	ranlib libserial_bblas.a
 
 clean : 
 	rm *.o
-	touch *.cpp
+	touch *.c
 
 pristine: 
 	make clean

@@ -3,26 +3,27 @@ include ../Makefile.inc
 
 all: lib
 
-dot.o : dot.cpp
-	$(CC) $(CFLAGS)  -c dot.cpp
+dot.o : dot.c
+	$(CC) $(CFLAGS)  -c dot.c
 
-mvv.o : mvv.cpp
-	$(CC) $(CFLAGS)  -c mvv.cpp
+mvv.o : mvv.c
+	$(CC) $(CFLAGS)  -c mvv.c
 
-mmm.o : mmm.cpp
-	$(CC) $(CFLAGS)  -c mmm.cpp
+mmm.o : mmm.c
+	$(CC) $(CFLAGS)  -c mmm.c
 
-vvm.o : vvm.cpp
-	$(CC) $(CFLAGS)  -c vmm.cpp
+vvm.o : vvm.c
+	$(CC) $(CFLAGS)  -c vvm.c
 
-ils.o : ils.cpp
-	$(CC) $(CFLAGS)  -c ils.cpp
+#ils.o : ils.c
+#	$(CC) $(CFLAGS)  -c ils.c
 
-dls.o : dls.cpp
-	$(CC) $(CFLAGS)  -c dls.cpp
+#dls.o : dls.c
+#	$(CC) $(CFLAGS)  -c dls.c
 
-lib: dot.o ils.o dls.o vvm.o mvv.o mmm.o 
-	ar -rc libopenmp_bblas.a  mmm.o dot.o ils.o dls.o vvm.o mvv.o
+#MUST ADD LINEAR SOLVERS
+lib: dot.o vvm.o mvv.o mmm.o 
+	ar -rc libopenmp_bblas.a  mmm.o dot.o vvm.o mvv.o
 	ranlib libopenmp_bblas.a
 
 clean :

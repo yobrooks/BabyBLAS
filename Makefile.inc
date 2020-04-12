@@ -1,8 +1,8 @@
 # Makefile variables
 
 F90 = gfortran
-CC = gcc
+CC = gcc -std=c99
 FFLAGS = -cpp -O2
-CFLAGS = -O2 
-MYLIBS = -L./serial -lserial_bblas
-SYSLIBS = 
+CFLAGS = -g -fopenmp
+MYLIBS = -L./openmp -lopenmp_bblas -L./serial -lserial_bblas -L./lbstime -llbstime
+SYSLIBS = -lgomp
