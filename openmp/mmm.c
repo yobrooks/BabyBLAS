@@ -15,9 +15,9 @@ void mmm_(int *threads, int *length, double *ma, double *mb, double *mc){
     omp_set_num_threads(*threads);
     int len = *length;
     int i, j, k;
-    printf("ABOUT TO PARALLEL\n");
-   printf("LENGTH %i \n", length);
-    printf("THREADS %i \n", threads);
+    //printf("ABOUT TO PARALLEL\n");
+   //printf("LENGTH %i \n", length);
+   // printf("THREADS %i \n", threads);
     #pragma omp parallel shared(len) private(i, j, k)
     {
         for(i = 0; i < len; i++){
@@ -30,5 +30,5 @@ void mmm_(int *threads, int *length, double *ma, double *mb, double *mc){
         }
     }
 
-    printf("END PARALLEL\n");
+    //printf("END PARALLEL\n");
 }
