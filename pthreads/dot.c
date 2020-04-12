@@ -85,7 +85,6 @@ void *dot_thread_worker(struct DOTargs *thread_args){
         tempDot = tempDot + *(A+i)* *(B+i);
     }
 
-    //put that !!!!!
     *(myresults+thread_args->threadNum) = tempDot;
     free(thread_args);
     pthread_exit(NULL);
