@@ -1,1 +1,0 @@
-void vvm(int threads, int length, double *a, double *b, double *m);

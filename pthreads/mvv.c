@@ -1,9 +1,17 @@
 /* Matrix Vector Multiplication --> resultant Vector */
-#include <pthread.h>
-void mvv(int threads, int length, double *m, double *v, double *rv);
+#ifdef __cplusplus
+extern "C" {
+#endif
+void mvv_(int *threads, int *length, double *m, double *v, double *rv);
+#ifdef __cplusplus
+}
+#endif
 
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
 /* Function Prototypes*/
-void singleMVV(int length, double *m, double *v, double *rv);
+void singleMVV(int *length, double *m, double *v, double *rv);
 void *mvv_thread_worker(MVVargs *thread_args);
 /*Struct for Thread Data*/
 struct MVVargs{
@@ -15,27 +23,29 @@ struct MVVargs{
     double *rvPtr;
 };
 
-void mvv(int threads, int length, double *m, double *v, double *rv){
-    if(length < threads){
+void mvv_(int *threads, int *length, double *m, double *v, double *rv){
+    if(*length < *threads){
         singleMVV(length, m, v, rv);
     }else{
-        pthread_t *thread_id = new pthread_t[threads];
-        int *numRows = new int[threads];
-        MVVargs *thread_data;
-        for(int i=0; i<threads; i++){
-            *(numRows+i) = length/threads;
+        int len = *length;
+        int numThreads = *threads;
+        pthread_t *thread_id = (pthread_t*)malloc(numThreads * sizeof(pthread_t)); 
+        int *numRows = (int*)malloc(numThreads * sizeof(int));
+        struct MVVargs *thread_data;
+        for(int i=0; i<numThreads; i++){
+            *(numRows+i) = len/numThreads;
         }
 
-        for(int i=0; i<(length%threads); i++){
+        for(int i=0; i<(len%numThreads); i++){
             *(numRows+i) = *(numRows+i)+1;
         }
 
         int startRow, stopRow = 0;
-        for(int i = 0; i < threads; i++){
+        for(int i = 0; i < numThreads; i++){
             startRow = stopRow;
             stopRow = startRow+*(numRows+i);
-            thread_data = new MVVargs;
-            thread_data->N = length;
+            thread_data = (struct MVVargs*)malloc(sizeof(struct MVVargs));
+            thread_data->N = len;
             thread_data->rowStart = startRow;
             thread_data->rowStop = stopRow;
             thread_data->mPtr = m;
@@ -44,25 +54,26 @@ void mvv(int threads, int length, double *m, double *v, double *rv){
 
             pthread_create(thread_id+i, NULL, &mvv_thread_worker, thread_data);
         }
-        for(int i = 0; i < threads, i++){
+        for(int i = 0; i < numThreads, i++){
             pthread_join(*(thread_id+i), NULL);
         }
 
-        delete numRows;
-        delete thread_id;
+        free(numRows);
+        free(thread_id);
     }
 }
 
-    void singleMVV(int length, double *m, double *v, double *rv){
-        for(int i = 0; i < length; i++){
+    void singleMVV(int *length, double *m, double *v, double *rv){
+        int len = *length;
+        for(int i = 0; i < len; i++){
             *(rv+i) = 0.0;
-            for(int j = 0; j < length; j++){
-                *(rv+i)  = *(rv+i) + *(m+(i*length+j)) + *(v+j);
+            for(int j = 0; j < len; j++){
+                *(rv+i)  = *(rv+i) + *(m+(i*len+j)) + *(v+j);
             }
         }
     }
 
-    void *mvv_thread_worker(MVVargs *thread_args){
+    void *mvv_thread_worker(struct MVVargs *thread_args){
         double *M, double *V, double *RV;
         //int rowStart = thread_args->rowStart;
        // int rowStop = thread_args->rowStop;
@@ -75,6 +86,6 @@ void mvv(int threads, int length, double *m, double *v, double *rv){
             }
         }
 
-        delete thread_args;
+        free(thread_args);
         pthread_exit(NULL);
     }
