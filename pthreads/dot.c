@@ -81,7 +81,7 @@ void *dot_thread_worker(struct DOTargs *thread_args){
     double *myresults = thread_args->threadResultPtr;
 
     //find the dot product for this particular thread
-    for(int i = start; i < sstop; i++){
+    for(int i = start; i < stop; i++){
         tempDot = tempDot + *(A+i)* *(B+i);
     }
 

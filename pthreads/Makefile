@@ -3,17 +3,17 @@ include ../Makefile.inc
 
 all: lib
 
-dot.o : dot.cpp
-	$(CC) $(CFLAGS)  -c dot.cpp
+dot.o : dot.c
+	$(CC) $(CFLAGS)  -c dot.c
 
-mvv.o : mvv.cpp
-	$(CC) $(CFLAGS)  -c mvv.cpp
+mvv.o : mvv.c
+	$(CC) $(CFLAGS)  -c mvv.c
 
-mmm.o : mmm.cpp
-	$(CC) $(CFLAGS)  -c mmm.cpp
+mmm.o : mmm.c
+	$(CC) $(CFLAGS)  -c mmm.c
 
-vvm.o : vvm.cpp
-	$(CC) $(CFLAGS)  -c vmm.cpp
+vvm.o : vvm.c
+	$(CC) $(CFLAGS)  -c vvm.c
 
 
 lib: dot.o vvm.o mvv.o mmm.o 

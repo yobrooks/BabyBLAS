@@ -12,7 +12,8 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv);
 #include <stdlib.h>
 /* Function Prototypes*/
 void singleMVV(int *length, double *m, double *v, double *rv);
-void *mvv_thread_worker(MVVargs *thread_args);
+void *mvv_thread_worker();
+
 /*Struct for Thread Data*/
 struct MVVargs{
     int N;
@@ -54,7 +55,7 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv){
 
             pthread_create(thread_id+i, NULL, &mvv_thread_worker, thread_data);
         }
-        for(int i = 0; i < numThreads, i++){
+        for(int i = 0; i < numThreads; i++){
             pthread_join(*(thread_id+i), NULL);
         }
 
@@ -74,7 +75,7 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv){
     }
 
     void *mvv_thread_worker(struct MVVargs *thread_args){
-        double *M, double *V, double *RV;
+        double *M, *V, *RV;
         //int rowStart = thread_args->rowStart;
        // int rowStop = thread_args->rowStop;
         M = thread_args->mPtr; V = thread_args->vPtr; RV = thread_args->rvPtr;

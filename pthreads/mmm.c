@@ -3,13 +3,15 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-void mmm(int *threads, int *length, double *ma, double *mb, double *mc);
+void mmm_(int *threads, int *length, double *ma, double *mb, double *mc);
 #ifdef __cplusplus
 }
 #endif
+
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
+
 
 /* Function Prototypes */
 void *mmm_thread_worker();
@@ -25,7 +27,7 @@ struct MMMargs{
     double *mcPtr;
 };
 
-void mmm(int *threads, int *length, double *ma, double *mb, double *mc){
+void mmm_(int *threads, int *length, double *ma, double *mb, double *mc){
     int startRow, stopRow;
     int *numRows; //pointer to array or variable?
     pthread_t *thread_id; //arrays
@@ -90,7 +92,7 @@ void singleMMM(int *length, double *ma, double *mb, double *mc){
     }
 }
 
-void *mmm_thread_worker(MMMargs *thread_args){
+void *mmm_thread_worker(struct MMMargs *thread_args){
 
     //Unpack the thread data from struct
     double *MA, *MB, *MC;
@@ -106,7 +108,7 @@ void *mmm_thread_worker(MMMargs *thread_args){
         for(int j = 0; j < N; j++){
             *(MC+(i*N+j)) = 0.0;
             for(int k = 0; k < N; k++){
-                *(MC+(i*N+j)) = *(MC+(i*N+j)) + **(MA+(i*N+k)) * *(MB+(k*N+j));
+                *(MC+(i*N+j)) = *(MC+(i*N+j)) + *(MA+(i*N+k)) * *(MB+(k*N+j));
             }
         }
     }
