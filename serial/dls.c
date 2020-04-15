@@ -22,6 +22,7 @@ void dls_(int *threads, int *length, double *m, double *v, double *rv){
     //check matrix m for strict diagonal dominance to see if matrix
     //reduction is possible without doing row interchanges
     if(!strictlyDiagonallyDominant(len, m)){
+        printf("NOT DIAGDOM\n");
         //Do Gaussian Elimination with Partial Pivoting
 
         //create array to hold pivot swaps
@@ -87,12 +88,12 @@ void dls_(int *threads, int *length, double *m, double *v, double *rv){
             *(v+ *(p+k)) = tmp;
 
             for(int j=k+1;j<len;j++){ 
-                *(v+j)= *(v+j) - *(v+k) * *(m+N*j+k);  
+                *(v+j)= *(v+j) - *(v+k) * *(m+len*j+k);  
             }
         }
 
         //Now do the backward substitution to get solution vector vr
-        *(v+N-1) = *(v+len-1) / *(m+len*(len-1)+(len-1));
+        *(v+len-1) = *(v+len-1) / *(m+len*(len-1)+(len-1));
         for(int i=len-2;i>=0;i--){
             tmp = 0.0;
             for(int j=i+1;j<len;j++){
@@ -109,7 +110,7 @@ void dls_(int *threads, int *length, double *m, double *v, double *rv){
     else{
         //Matrix is strictly diagonally dominant
         //verify none of pivot elements are zero
-        int singlular = 1;
+        int singular = 1;
         int i = 0;
         while (i<len && singular){
             singular = *(m+i*len+i) == ZERO;   
@@ -172,6 +173,6 @@ int strictlyDiagonallyDominant(int N, double *a){
             testPassed = fabs(*(a+row*N+row)) > sum;
         }
     }
-
+   printf("TEST PASSED %d\n", testPassed);
     return testPassed;
 }

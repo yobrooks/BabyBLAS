@@ -14,9 +14,14 @@ mmm.o : mmm.c
 mvv.o : mvv.c
 	$(CC) $(CFLAGS) -c mvv.c
 
+dls.o : dls.c
+	$(CC) $(CFLAGS) -c dls.c
 
-lib: dot.o vvm.o mmm.o mvv.o
-	ar -rc libserial_bblas.a dot.o vvm.o mmm.o  mvv.o
+ils.o : ils.c
+	$(CC) $(CFLAGS) -c ils.c
+
+lib: dot.o vvm.o mmm.o mvv.o dls.o ils.o
+	ar -rc libserial_bblas.a dot.o vvm.o mmm.o mvv.o ils.o dls.o
 	ranlib libserial_bblas.a
 
 clean : 

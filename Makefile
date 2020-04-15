@@ -3,13 +3,13 @@
 include Makefile.inc
 
 #MUST ADD PTHREADS
-all : driver serial lbstime
+all : testdriver serial lbstime
 
-driver: driver.o serial lbstime
-	$(F90) driver.o -o driver $(MYLIBS) $(SYSLIBS)
+testdriver: testdriver.o serial lbstime
+	$(F90) testdriver.o -o testdriver $(MYLIBS) $(SYSLIBS)
 
-driver.o: driver.f90
-	$(F90) $(FFLAGS) driver.f90 -c
+testdriver.o: testdriver.f90
+	$(F90) $(FFLAGS) testdriver.f90 -c
 
 serial:
 	cd serial && $(MAKE)
@@ -27,7 +27,7 @@ pristine:
 	cd serial && $(MAKE) pristine
 	cd lbstime && $(MAKE) pristine 
 	rm *.o	
-	rm driver
+	rm testdriver
 	touch *.f90
 
 .PHONY: serial lbstime

@@ -48,7 +48,7 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
                      sum1 = sum1+*(m+i*len+j)* *(x0+j);
                 }
                 double sum2 = 0.0;
-                for(int j = 0; j < len; j++){
+                for(int j = i+1; j < len; j++){
                     sum2 = sum2+ *(m+i*len+j)* *(x0+j); 
                 }
                 *(rv+i) = (*(v+i) - sum1 - sum2) / *(m+i*len+i);
@@ -74,7 +74,7 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
 int zerosInDiag(int N, double *a){
     double ZERO = 0.0;
     int foundZero = 0;
-    for(int i = 0; i < N, i++){
+    for(int i = 0; i < N; i++){
         if(!foundZero){
             foundZero = fabs(*(a+i*N+i)) == ZERO;
         }
