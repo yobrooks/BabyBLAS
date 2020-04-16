@@ -28,6 +28,7 @@ struct MMMargs{
 };
 
 void mmm_(int *threads, int *length, double *ma, double *mb, double *mc){
+    printf("Using Pthreads\n");
     int startRow, stopRow;
     int *numRows; //pointer to array or variable?
     pthread_t *thread_id; //arrays

@@ -10,12 +10,8 @@ real (kind=8) :: trace
 integer :: startval, stopval, stepval, nthreads
 real (kind=8) :: walltime
 real (kind=8) :: cputime 
-external walltime, cputime
-
-#ifdef DOTDRIVER
 real (kind=8) :: dot 
-external dot
-#endif
+external walltime, cputime, dot
 
 character (len=8) :: carg1, carg2, carg3, carg4
 
@@ -38,8 +34,28 @@ read (carg2,'(i8)') stopval
 read (carg3,'(i8)') stepval
 read (carg4,'(i8)') nthreads 
 
+#if defined(ILSDRIVER)
+print *, "RUNNING ITERATIVE LINEAR SOLVER"
+
+#elif defined(DLSDRIVER)
+print *, "RUNNING DIRECT LINEAR SOLVER"
+
+#elif defined(VVMDRIVER)
+print *, "RUNNING TENSOR PRODUCT"
+
+#elif defined(MVVDRIVER)
+print *, "RUNNING MATRIX VECTOR MULTIPLICATION"
+
+#elif defined(MMMDRIVER)
+print *, "RUNNING MATRIX MATRIX MULTIPLICATION"
+
+! Dot Product is Default Test
+#else
+print *, "RUNNING DOT PRODUCT"
+#endif
+
 do iter = startval, stopval, stepval
-  
+ 
 
 NDIM = iter
 
@@ -51,10 +67,10 @@ allocate ( matrixa(NDIM,NDIM), stat=ierr)
 allocate ( matrixb(NDIM,NDIM), stat=ierr)
 allocate ( matrixc(NDIM,NDIM), stat=ierr)
 
-! Fill Vectors A and B and Compute 
+! Fill Vectors A and B
 do i = 1, NDIM 
-     veca(i) = sqrt(dble(NDIM)) 
-     vecb(i) = 1.0 / sqrt( dble(NDIM))
+  veca(i) = sqrt(dble(NDIM)) 
+  vecb(i) = 1.0 / sqrt( dble(NDIM))
 enddo
 
 ! Zero Matrices
@@ -63,7 +79,7 @@ matrixb = 0.0
 matrixc = 0.0
 
 #if defined(DLSDRIVER) || defined(ILSDRIVER)
-buildLinearSystem(NDIM, matrixa, vecb, vecx)
+call buildLinearSystem(NDIM, matrixa, vecb, vecx)
 #else
 call vvm(nthreads, NDIM, veca, vecb, matrixa)
 call vvm(nthreads, NDIM, veca, vecb, matrixb)
@@ -85,36 +101,39 @@ call dls(nthreads, NDIM, matrixa, vecb, vecx)
 call vvm(nthreads, NDIM, veca, vecb, matrixc)
 
 #elif defined(MVVDRIVER)
-call vvm(nthreads, NDIM, matrixa, veca, vecx)
+call mvv(nthreads, NDIM, matrixa, veca, vecx)
 
 #elif defined(MMMDRIVER)
 call mmm(nthreads, NDIM, matrixa, matrixb, matrixc)
-#endif
 
-! Directives for the trace values of each function
-! This is where the DOT function will be called
-#if defined(DLSDRIVER) || defined(ILSDRIVER) || defined(MVVDRIVER)
-do i=1, NDIM
-   trace = max(trace, abs(vecx(i)-dble(i)))
-enddo
-#elif defined(DOTDRIVER)
+! Dot Product is Default Test
+#else
 trace = dot(nthreads, NDIM, veca, vecb)
-#else 
-do i=1, NDIM 
-    trace = trace + matrixc(i,i)
-enddo
 #endif
 
 ! End clock time
 cpu_end = cputime()
 wall_end = walltime()
 
+! Directives for the trace values of each function
+#if defined(DLSDRIVER) || defined(ILSDRIVER) || defined(MVVDRIVER)
+trace = 0.0
+do i=1, NDIM
+   trace = max(trace, abs(vecx(i)-dble(i)))
+enddo
+#elif defined(MMMDRIVER) || defined(VVMDRIVER)
+trace = 0.0
+do i=1, NDIM 
+    trace = trace + matrixc(i,i)
+enddo
+#endif
+
 ! Calculate Megaflops
-mflops  = 2*dble(NDIM)/ (cpu_end-cpu_start) / 1.0e6
+mflops = 2*dble(NDIM)/ (cpu_end-cpu_start) / 1.0e6
 mflops2 = 2*dble(NDIM)/ (wall_end-wall_start)/ 1.0e6
- 
+
 ! print out final information
-print *, NDIM, trace, cpu_end-cpu_start, wall_end-wall_start,  mflops, mflops2
+print *, NDIM, trace, cpu_end-cpu_start, wall_end-wall_start, mflops, mflops2
 
 
 deallocate(matrixa)

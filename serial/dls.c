@@ -22,7 +22,6 @@ void dls_(int *threads, int *length, double *m, double *v, double *rv){
     //check matrix m for strict diagonal dominance to see if matrix
     //reduction is possible without doing row interchanges
     if(!strictlyDiagonallyDominant(len, m)){
-        printf("NOT DIAGDOM\n");
         //Do Gaussian Elimination with Partial Pivoting
 
         //create array to hold pivot swaps
@@ -173,6 +172,5 @@ int strictlyDiagonallyDominant(int N, double *a){
             testPassed = fabs(*(a+row*N+row)) > sum;
         }
     }
-   printf("TEST PASSED %d\n", testPassed);
     return testPassed;
 }

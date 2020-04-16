@@ -9,8 +9,10 @@ extern "C"{
 
 #include <omp.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void mmm_(int *threads, int *length, double *ma, double *mb, double *mc){
+    printf("Using OpenMP\n");
     //Set number of threads to use
     omp_set_num_threads(*threads);
     int len = *length;

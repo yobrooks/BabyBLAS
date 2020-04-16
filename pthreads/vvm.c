@@ -23,6 +23,7 @@ struct VVMargs{
 };
 
 void vvm_(int *threads, int *length, double *a, double *b, double *m){
+    printf("Using PThreads\n");
     int len = *length;
     int numThreads = *threads;
     if(len < numThreads){
@@ -54,6 +55,7 @@ void vvm_(int *threads, int *length, double *a, double *b, double *m){
             thread_data->aPtr = a;
             thread_data->bPtr = b;
             thread_data->mPtr = m;
+            thread_data->N = len;
 
             pthread_create(thread_id+i, NULL, &vvm_thread_worker, thread_data);
         }

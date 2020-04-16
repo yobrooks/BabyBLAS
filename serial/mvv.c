@@ -14,7 +14,7 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv){
     for(int i = 0; i < len; i++){
         *(rv+i) = 0.0;
         for(int j = 0; j < len; j++){
-            *(rv+i)  = *(rv+i) + *(m+(i*len+j)) + *(v+j);
+            *(rv+i) = *(m +(len*i)+j) * *(v+j);
         }
     }
 }

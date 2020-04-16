@@ -7,8 +7,10 @@ double dot_(int *threads, int *length, double *a, double *b);
 #endif
 
 #include <omp.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 double dot_(int *threads, int *length, double *a, double *b){
+    printf("Using OpenMP\n");
     omp_set_num_threads(*threads);
 
     int len = *length;

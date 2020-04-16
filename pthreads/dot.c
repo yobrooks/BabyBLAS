@@ -24,6 +24,7 @@ struct DOTargs{
 };
 
 double dot_(int *threads, int *length, double *a, double *b){
+    printf("Using PThreads\n");
     int numThreads = *threads;
     int len = *length;
     double product = 0.0;

@@ -26,7 +26,7 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
     if(!zerosInDiag(len, m)){
         //create a temporary vector x0 to hold initial values 
         double *x0 = malloc(len*sizeof(double));
-        
+        //COUNT THIS AS AN OPTIMIZATION???
         //fill the result vector rv with initial values of 0
         //fill x0 vector with values of vector v
         for(int i = 0; i < len; i++){

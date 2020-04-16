@@ -25,6 +25,7 @@ struct MVVargs{
 };
 
 void mvv_(int *threads, int *length, double *m, double *v, double *rv){
+    printf("Using PThreads\n");
     if(*length < *threads){
         singleMVV(length, m, v, rv);
     }else{
@@ -69,7 +70,7 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv){
         for(int i = 0; i < len; i++){
             *(rv+i) = 0.0;
             for(int j = 0; j < len; j++){
-                *(rv+i)  = *(rv+i) + *(m+(i*len+j)) + *(v+j);
+                *(rv+i)  = *(m+(i*len+j)) + *(v+j);
             }
         }
     }
@@ -83,10 +84,9 @@ void mvv_(int *threads, int *length, double *m, double *v, double *rv){
         for(int i = thread_args->rowStart; i < thread_args->rowStop; i++){
             *(RV+i) = 0.0;
             for(int j = 0; j < thread_args->N; j++){
-                *(RV+i)  = *(RV+i) + *(M+(i*thread_args->N+j)) + *(V+j);
+                *(RV+i)  = *(M+(i*thread_args->N+j)) + *(V+j);
             }
         }
-
         free(thread_args);
         pthread_exit(NULL);
     }

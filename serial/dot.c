@@ -16,5 +16,6 @@ double dot_(int *threads, int *length, double *a, double *b){
     for(int i = 0; i < len; i++){
         product = product + *(a+i) * *(b+i);
     }
+    return product;
 }
 

@@ -10,7 +10,7 @@ void vvm_(int *threads, int *length, double *a, double *b, double *m){
     int len = *length;
     for(int i = 0; i < len; i++){
         for(int j = 0; j < len; j++){
-            *(m+(len*i+j)) = *(a+i) * *(b+j);
+            *(m+(len*i)+j) = *(a+i) * *(b+j);
         }
     }
 }

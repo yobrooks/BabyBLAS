@@ -8,8 +8,11 @@ void vvm_(int *threads, int *length, double *a, double *b, double *m);
 #endif
 
 #include <omp.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void vvm_(int *threads, int *length, double *a, double *b, double *m){
+    printf("Using OpenMP\n");
     omp_set_num_threads(*threads);
 
     int i, j, len = *length;
