@@ -3,13 +3,13 @@
 include Makefile.inc
 
 #MUST ADD PTHREADS
-all : driver pthreads openmp serial lbstime
+all : poundsdriver pthreads openmp serial lbstime
 
-driver: driver.o serial lbstime pthreads openmp
-	$(F90) driver.o -o driver $(MYLIBS) $(SYSLIBS)
+poundsdriver: poundsdriver.o serial lbstime pthreads openmp
+	$(F90) poundsdriver.o -o poundsdriver $(MYLIBS) $(SYSLIBS)
 
-driver.o: driver.f90
-	$(F90) $(FFLAGS) driver.f90 -c
+poundsdriver.o: poundsdriver.f90
+	$(F90) $(FFLAGS) poundsdriver.f90 -c
 
 serial:
 	cd serial && $(MAKE)
@@ -37,7 +37,7 @@ pristine:
 	cd pthreads && $(MAKE) pristine 
 	cd openmp && $(MAKE) pristine  
 	rm *.o	
-	rm driver
+	rm poundsdriver
 	touch *.f90
 
 .PHONY: serial openmp pthreads lbstime

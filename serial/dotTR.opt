@@ -1,0 +1,4 @@
+
+Analyzing loop at dot.c:16
+
+dot.c:13: note: vectorized 0 loops in function.

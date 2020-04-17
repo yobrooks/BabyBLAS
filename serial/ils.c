@@ -38,8 +38,7 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
         int iteration = 0;
         while(!converged(len, rv, x0) && iteration < ITERATION_MAX){
             for(int i = 0; i < len; i++){
-                *(x0+i) = *(rv+i); //copy last result to initial values
-                
+                *(x0+i) = *(rv+i); //copy last result to initial values  
             }
             //start reduction process
             for(int i = 0; i < len; i++){

@@ -86,6 +86,7 @@ void *dot_thread_worker(struct DOTargs *thread_args){
         tempDot = tempDot + *(A+i)* *(B+i);
     }
 
+    //could have just used a pointer to an actual double???
     *(myresults+thread_args->threadNum) = tempDot;
     free(thread_args);
     pthread_exit(NULL);

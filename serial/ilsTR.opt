@@ -1,0 +1,76 @@
+
+Analyzing loop at ils.c:90
+
+Analyzing loop at ils.c:44
+
+Analyzing loop at ils.c:46
+
+Analyzing loop at ils.c:50
+
+Analyzing loop at ils.c:90
+
+Analyzing loop at ils.c:32
+
+Analyzing loop at ils.c:76
+
+ils.c:20: note: vectorized 0 loops in function.
+
+ils.c:78: note: vect_recog_bool_pattern: detected: 
+ils.c:78: note: pattern recognized: patt_296 = (int) patt_239;
+
+ils.c:78: note: additional pattern stmt: patt_239 = _110 == 0.0 ? 1 : 0;
+
+ils.c:37: note: vect_recog_divmod_pattern: detected: patt_40 = patt_141 - patt_39;
+
+ils.c:37: note: pattern recognized: patt_40 = patt_141 - patt_39;
+
+Analyzing loop at ils.c:76
+
+ils.c:73: note: vectorized 0 loops in function.
+
+ils.c:78: note: vect_recog_bool_pattern: detected: 
+ils.c:78: note: pattern recognized: patt_24 = (int) patt_25;
+
+ils.c:78: note: additional pattern stmt: patt_25 = _13 == 0.0 ? 1 : 0;
+
+Analyzing loop at ils.c:90
+
+ils.c:85: note: vectorized 0 loops in function.
+
+Analyzing loop at ils.c:90
+
+Analyzing loop at ils.c:44
+
+Analyzing loop at ils.c:46
+
+Analyzing loop at ils.c:50
+
+Analyzing loop at ils.c:90
+
+Analyzing loop at ils.c:32
+
+Analyzing loop at ils.c:76
+
+ils.c:20: note: vectorized 0 loops in function.
+
+ils.c:78: note: vect_recog_bool_pattern: detected: 
+ils.c:78: note: pattern recognized: patt_296 = (int) patt_239;
+
+ils.c:78: note: additional pattern stmt: patt_239 = _110 == 0.0 ? 1 : 0;
+
+ils.c:37: note: vect_recog_divmod_pattern: detected: patt_40 = patt_141 - patt_39;
+
+ils.c:37: note: pattern recognized: patt_40 = patt_141 - patt_39;
+
+Analyzing loop at ils.c:76
+
+ils.c:73: note: vectorized 0 loops in function.
+
+ils.c:78: note: vect_recog_bool_pattern: detected: 
+ils.c:78: note: pattern recognized: patt_24 = (int) patt_25;
+
+ils.c:78: note: additional pattern stmt: patt_25 = _13 == 0.0 ? 1 : 0;
+
+Analyzing loop at ils.c:90
+
+ils.c:85: note: vectorized 0 loops in function.

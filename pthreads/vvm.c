@@ -79,7 +79,7 @@ void *vvm_thread_worker(struct VVMargs *thread_args){
 
     for(int i = start; i < stop; i++){
         for(int j = 0; j < N; j++){
-            *(M+(N*i+j)) = *(A+i) * *(B+j);
+            *(M+(N*i)+j) = *(A+i) * *(B+j);
         }
     }
     
