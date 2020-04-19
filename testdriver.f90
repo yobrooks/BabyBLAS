@@ -1,4 +1,4 @@
-program driver 
+program testdriver 
 
 integer :: NDIM
 
@@ -64,7 +64,7 @@ call vvm(1, NDIM, veca, vecb, matrixb)
 wall_start = walltime()
 cpu_start = cputime()
 
-call vvm(1, NDIM, veca, vecb, matrixc)
+call mmm(nthreads, NDIM, veca, vecb, matrixc)
 
 cpu_end = cputime()
 wall_end = walltime()
@@ -94,5 +94,5 @@ deallocate(vecb)
 
 enddo
 
-end program driver 
+end program testdriver 
  

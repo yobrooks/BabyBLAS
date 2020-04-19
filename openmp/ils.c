@@ -32,8 +32,8 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
         int iteration = 0;
         double sum1, sum2;
         ITERATION_MAX = fmax(ITERATION_MAX, len/3);
-        #pragma omp parallel for private(i)
             //set up variables
+        #pragma omp parallel for private(i)
             for(i = 0; i < len; i++){
                 *(rv+i) = 0.0;
                 *(x0+i) = *(v+i);
@@ -46,20 +46,18 @@ void ils_(int *threads, int *length, double *m, double *v, double *rv){
                     *(x0+i) = *(rv+i); //copy last result to initial values  
                 }
 
-            //parallel reduction process
-            #pragma omp parallel private (i, j)
+            //reduction process
+            #pragma omp parallel for private(i, j) reduction(+:sum1, sum2)
                 for(i = 0; i < len; i++){
                     sum1 = 0.0;
-                    #pragma omp for reduction(+:sum1)
-                        for(j = 0; j < i-1; j++){
-                            sum1 = sum1+*(m+i*len+j)* *(x0+j);
-                        }
+                    for(j = 0; j < i-1; j++){
+                        sum1 = sum1+*(m+i*len+j)* *(x0+j);
+                    }
                     sum2 = 0.0;
-                    #pragma omp for reduction(+:sum2)
-                        for(j = i+1; j < len; j++){
-                            sum2 = sum2+ *(m+i*len+j)* *(x0+j); 
-                        }
-                    
+                    for(j = i+1; j < len; j++){
+                        sum2 = sum2+ *(m+i*len+j)* *(x0+j); 
+                    }
+                        
                     *(rv+i) = (*(v+i) - sum1 - sum2) / *(m+i*len+i);
                 }
             iteration++;

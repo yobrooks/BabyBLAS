@@ -15,11 +15,9 @@ double dot_(int *threads, int *length, double *a, double *b){
 
     int len = *length;
     int i; double product = 0.0;
-     #pragma omp parallel shared(len) private(i) reduction(+:product)
-    {
-        for(i = 0; i < len; i++){
-            product = product + *(a+i) * *(b+i);
-        } 
-    }
+    #pragma omp parallel for schedule(static) private(i) reduction(+:product)
+            for(i = 0; i < len; i++){
+                product = product + *(a+i) * *(b+i);
+            } 
     return product;  
 }

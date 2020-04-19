@@ -1,8 +1,0 @@
-
-Analyzing loop at mmm.c:12
-
-Analyzing loop at mmm.c:13
-
-Analyzing loop at mmm.c:15
-
-mmm.c:9: note: vectorized 0 loops in function.

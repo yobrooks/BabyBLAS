@@ -1,3 +1,4 @@
+! FLAGS AREN'T WORKING RIGHT NEED TO FIX; USE POUNDS DRIVER FOR TIMING
 program driver
 integer :: NDIM
 
@@ -81,8 +82,8 @@ matrixc = 0.0
 #if defined(DLSDRIVER) || defined(ILSDRIVER)
 call buildLinearSystem(NDIM, matrixa, vecb, vecx)
 #else
-call vvm(nthreads, NDIM, veca, vecb, matrixa)
-call vvm(nthreads, NDIM, veca, vecb, matrixb)
+call vvm(1, NDIM, veca, vecb, matrixa)
+call vvm(1, NDIM, veca, vecb, matrixb)
 #endif
 
 ! Start the clock
