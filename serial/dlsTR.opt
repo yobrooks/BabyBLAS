@@ -1,0 +1,152 @@
+
+Analyzing loop at dls.c:104
+
+Analyzing loop at dls.c:96
+
+Analyzing loop at dls.c:98
+
+Analyzing loop at dls.c:83
+
+Analyzing loop at dls.c:89
+
+Analyzing loop at dls.c:36
+
+Analyzing loop at dls.c:58
+
+Analyzing loop at dls.c:61
+
+Analyzing loop at dls.c:48
+
+Analyzing loop at dls.c:39
+
+Analyzing loop at dls.c:29
+
+
+Vectorizing loop at dls.c:29
+
+dls.c:29: note: === vect_do_peeling_for_alignment ===
+dls.c:29: note: niters for prolog loop: MIN_EXPR <(unsigned int) -(((unsigned long) vect_pp.7_235 & 15) >> 2) & 3, niters.4_233>Setting upper bound of nb iterations for prologue loop to 6
+
+dls.c:29: note: === vect_update_inits_of_dr ===
+dls.c:29: note: === vect_do_peeling_for_loop_bound ===Setting upper bound of nb iterations for epilogue loop to 2
+
+dls.c:29: note: LOOP VECTORIZED.
+Analyzing loop at dls.c:158
+
+Analyzing loop at dls.c:150
+
+Analyzing loop at dls.c:152
+
+Analyzing loop at dls.c:140
+
+Analyzing loop at dls.c:141
+
+Analyzing loop at dls.c:127
+
+Analyzing loop at dls.c:128
+
+Analyzing loop at dls.c:130
+
+Analyzing loop at dls.c:114
+
+Analyzing loop at dls.c:167
+
+Analyzing loop at dls.c:170
+
+dls.c:17: note: vectorized 1 loops in function.
+
+dls.c:29: note: Completely unroll loop 2 times
+
+dls.c:17: note: Completely unroll loop 6 times
+
+dls.c:171: note: vect_recog_bool_pattern: detected: 
+dls.c:171: note: pattern recognized: patt_347 = (int) patt_222;
+
+dls.c:171: note: additional pattern stmt: patt_222 = _353 > sum_354 ? 1 : 0;
+
+Analyzing loop at dls.c:167
+
+Analyzing loop at dls.c:170
+
+dls.c:164: note: vectorized 0 loops in function.
+
+dls.c:171: note: vect_recog_bool_pattern: detected: 
+dls.c:171: note: pattern recognized: patt_8 = (int) patt_7;
+
+dls.c:171: note: additional pattern stmt: patt_7 = _25 > sum_26 ? 1 : 0;
+
+Analyzing loop at dls.c:104
+
+Analyzing loop at dls.c:96
+
+Analyzing loop at dls.c:98
+
+Analyzing loop at dls.c:83
+
+Analyzing loop at dls.c:89
+
+Analyzing loop at dls.c:36
+
+Analyzing loop at dls.c:58
+
+Analyzing loop at dls.c:61
+
+Analyzing loop at dls.c:48
+
+Analyzing loop at dls.c:39
+
+Analyzing loop at dls.c:29
+
+
+Vectorizing loop at dls.c:29
+
+dls.c:29: note: === vect_do_peeling_for_alignment ===
+dls.c:29: note: niters for prolog loop: MIN_EXPR <(unsigned int) -(((unsigned long) vect_pp.7_235 & 15) >> 2) & 3, niters.4_233>Setting upper bound of nb iterations for prologue loop to 6
+
+dls.c:29: note: === vect_update_inits_of_dr ===
+dls.c:29: note: === vect_do_peeling_for_loop_bound ===Setting upper bound of nb iterations for epilogue loop to 2
+
+dls.c:29: note: LOOP VECTORIZED.
+Analyzing loop at dls.c:158
+
+Analyzing loop at dls.c:150
+
+Analyzing loop at dls.c:152
+
+Analyzing loop at dls.c:140
+
+Analyzing loop at dls.c:141
+
+Analyzing loop at dls.c:127
+
+Analyzing loop at dls.c:128
+
+Analyzing loop at dls.c:130
+
+Analyzing loop at dls.c:114
+
+Analyzing loop at dls.c:167
+
+Analyzing loop at dls.c:170
+
+dls.c:17: note: vectorized 1 loops in function.
+
+dls.c:29: note: Completely unroll loop 2 times
+
+dls.c:17: note: Completely unroll loop 6 times
+
+dls.c:171: note: vect_recog_bool_pattern: detected: 
+dls.c:171: note: pattern recognized: patt_347 = (int) patt_222;
+
+dls.c:171: note: additional pattern stmt: patt_222 = _353 > sum_354 ? 1 : 0;
+
+Analyzing loop at dls.c:167
+
+Analyzing loop at dls.c:170
+
+dls.c:164: note: vectorized 0 loops in function.
+
+dls.c:171: note: vect_recog_bool_pattern: detected: 
+dls.c:171: note: pattern recognized: patt_8 = (int) patt_7;
+
+dls.c:171: note: additional pattern stmt: patt_7 = _25 > sum_26 ? 1 : 0;
